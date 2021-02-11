@@ -1,0 +1,217 @@
+<div id="title">Did shutting down Texas counties impact the spread of COVID-19?</div>
+<div class="content">
+  <h1>The Problem</h1>
+  <p>
+    In early 2020, the number of infected cases from the COVID-19 virus began to skyrocket. 
+    To curb the virus's spread, local and state governments in the United States began to pass various forms of mandates 
+    and shutdown orders. In particular, Texas's governor declared an executive order to stay at home except for essential services. 
+    Texas counties were free to determine what was considered an essential business. So, where were people in Texas 
+    going during the pandemic?
+  </p>
+  <p>
+    As the number of infections continues to rise, policymakers may be considering future restrictions for additional shutdowns. 
+    The policymakers must determine the restriction and enforcement level to ensure maximum compliance from the populace to adequately
+     curb the virus's spread. These shutdown periods must be as effective and efficient as possible to minimize economic decline and 
+     the number of new infections.
+  </p>
+  <p>
+    <b>Understanding the effectiveness of the mandates and shutdown orders in Texas will be vital in 
+    recommending new shutdown procedures.</b>
+  </p>
+  <p>Here is how we defined Texas metroplex areas.</p>
+  <ul>
+    <li><b>austin_metroplex:  </b>Bastrop County, Caldwell County, Hays County, Travis County, Williamson County</li>
+    <li><b>dallas_metroplex:  </b>Collin County, Dallas County, Denton County, Ellis County, Hood County, Hunt County,
+       Johnson County, Kaufman County, Parker County, Rockwall County, Somervell County, Tarrant County, Wise County</li>
+    <li><b>houston_metroplex:  </b>Austin County, Brazoria County, Chambers County, Fort Bend County, Galveston County,
+       Harris County, Liberty County, Montgomery County, Waller County</li>
+    <li><b>san_antonio_metroplex:  </b>Atascosa County, Bandera County, Bexar County, Comal County, Guadalupe County,
+       Kendall County, Medina County, Wilson County</li>
+  </ul> 
+  <h1>The Data</h1>
+  <p><b>Table 1: Texas Counties Closures Data —</b> This table includes one row per county, with information about
+     closure dates during the COVID-19 pandemic.
+  </p><br>
+  <table>
+    <tr>
+      <td class="column">county: </td>
+      <td>The Texas county from which the event was logged</td>
+    </tr>
+    <tr>
+      <td class="column">business_closed_date: </td>
+      <td>The time businesses were closed</td>
+    </tr>
+    <tr>
+      <td class="column">school_closed_date: </td>
+      <td>The time schools were closed</td>
+    </tr>
+    <tr>
+      <td class="column">religion_closed_date: </td>
+      <td>The time religious establishments were closed</td>
+    </tr>
+    <tr>
+      <td class="column">lockdown_closed_date: </td>
+      <td>The time a lockdown was declared</td>
+    </tr>
+    <tr>
+      <td class="column">emergency_declaration_date: </td>
+      <td>The time a state of emergency was declared</td>
+    </tr>
+    <tr>
+      <td class="column">safer_at_home_date: </td>
+      <td>The time a safer at home plan of action was declared</td>
+    </tr>
+  </table>
+  <p><b>Table 2: Texas Mobility Data —</b> This table shows the average percent change of mobility per Texas county.
+     Each row in a week looks at visits to parks, workplace, transit, grocery/pharmacy, and retail/recreation. It 
+     also tracks residential as time spent at home. 
+  </p><br>
+  <table>
+    <tr>
+      <td class="column">texas_county: </td>
+      <td>The Texas county from which the event was logged</td>
+    </tr>
+    <tr>
+      <td class="column">destination: </td>
+      <td>The type of destination</td>
+    </tr>
+    <tr>
+      <td class="column">week_number: </td>
+      <td>The number a particular week in the year</td>
+    </tr>
+   <tr>
+      <td class="column">year: </td>
+      <td>The year 2020</td>
+   </tr>
+   <tr>
+     <td class="column">metro_area: </td>
+     <td>The Texas metroplex area where the county is located</td>
+    </tr>
+    <tr>
+      <td class="column">percent_change: </td>
+     <td>The average percent change for a destination per week for each Texas county</td>
+    </tr>
+  </table>
+  <p><b>Table 3: Texas Counties Demographic Data —</b> This table shows the average population per ethnicity groups.
+  </p><br>
+  <table>
+    <tr>
+      <td class="column">fename: </td>
+      <td>The Texas county</td>
+    </tr>
+    <tr>
+      <td class="column">BA_All: </td>
+      <td>Black ethnicity group</td>
+    </tr>
+    <tr>
+      <td class="column">WA_All: </td>
+      <td>White ethnicty group</td>
+    </tr>
+   <tr>
+      <td class="column">H_All: </td>
+      <td>Hispanic ethnicity group</td>
+   </tr>
+   <tr>
+     <td class="column">AA_All: </td>
+     <td>Asian ethnicity group</td>
+    </tr>
+    <tr>
+      <td class="column">IAC_All: </td>
+     <td>American Indian or Alaska Native ethnicity groups</td>
+    </tr>
+    <tr>
+      <td class="column">HBA_All: </td>
+     <td>Hispanic or Black ethnicity group</td>
+    </tr>
+    <tr>
+      <td class="column">NHBA_All: </td>
+     <td>Not Hispanic or Black ethnicity group</td>
+    </tr>
+  </table>
+  <h1>Validating the Results</h1>
+  <h2>1.1 Weekly Mobility by Destination</h2>
+  <p>Let's take a look at where people in Texas were going during the pandemic.
+     We will use the Texas Mobility data. This data compared each day to the baseline
+      of mobility for various categories to show where people were going during 2020.
+       The baseline is the first five weeks of the year. We will start with a line graph
+        that depicts the percent change from the baseline. </p>
+  <div class="code-snippet">
+    <span id="comment">#set whitegrid to have grids in plots</span><br>
+    <span id="code">sns.set_style(<span id="string">"whitegrid"</span>)</span><br><br>
+    <span id="comment">#line plot that shows average mobility for the state 
+      of Texas during the year by week number</span><br>
+      <span id="code">
+        fig, ax=plt.subplots(figsize=(16,10))<br>
+        scatter = sns.lineplot(x=mobility_txm.loc[mobility_txm[<span id="string">'texas_county'</span>] == 
+        <span id="string">'Texas'</span>, <span id="string">'week_number'</span>],
+        y=mobility_txm.loc[mobility_txm[<span id="string">'texas_county'</span>] == 
+        <span id="string">'Texas'</span>, <span id="string">'week_number'</span>],
+        hue=mobility_txm['destination'])</span><br><br>
+    <span id="comment">#customize the plot</span><br>
+    <span id="code">
+      plt.xticks(rotation=90)<br>
+      plt.locator_params(axis=<span id="string">'x'</span>, nbins=100)
+    </span>
+  </div>
+  <h3 style="text-align: center;">Texas Weekly Destination Mobility</h3>
+  <img src="https://i.imgur.com/SVVRANw.png" style="
+  max-width: 100%;
+  height: auto;">
+  <p>People in Texas spent more time at the parks during the pandemic and less time 
+    in the workplace. We also saw a reduction in retail, recreation, and transit station visits.
+     The pharmacy and groceries remained close to the baseline. There was also an increase in 
+     the number of time people spent at home.  </p>
+  <h2>1.2 Destination by Metroplex Area</h2>
+  <p>The following is a violin plot that displays the yearly average mobility of Texas metroplexes.</p>
+  <div class="code-snippet">
+    <span id="comment">#show metro area mobility mean for the year by metro area vs percent change</span><br>
+    <span id="code">sns.catplot(x=<span id="string">'metro_area'</span>, y=<span id="string">'percent_change'</span>, 
+    hue=<span id="string">'destination'</span>, kind=<span id="string">'violin'</span>, data=mobility_metro, height=12, aspect=25/20)</span>
+  </div>
+  <h3 style="text-align: center;">Texas Metro Area Mobility</h3>
+  <img src="https://i.imgur.com/YiBmKCE.png" style="
+  max-width: 100%;
+  height: auto;">
+  <p>When comparing the activity of each metro area, there are a few things that stand out. 
+    Dallas showed the highest increase in park visits, and Austin was close to the baseline.
+     The baseline was only the first five weeks of the year, but the weather was nice all 
+     over Texas. It wouldn't have impacted the ability to go outside as much as other states.
+      People in Austin typically spend more time at parks, explaining why they remained near
+       the baseline. I also noticed that transit stations had more visits compared to the 
+       baseline than other metro areas. The workplace was the lowest below baseline in each
+        metro area, and people in each metro area spent more time at home.  </p>
+  <h2>1.3 Weekly Mobility by Metroplex</h2>
+  <div class="code-snippet">
+    <span id="comment">#scatterplots to show trends for each metroplex by week of the year</span><br>
+    <span id="code">
+      fig, ax=plt.subplots(figsize=(18,18))<br>
+      for i, city in enumerate(metro):<br>
+      plt.subplot(2,2,i+1)<br>
+      scatter = sns.scatterplot(x=mobility_metro.loc[mobility_metro[<span id="string">'metro_area'</span>] == city, <span id="string">'week_number'</span>],
+                       y=mobility_metro.loc[mobility_metro[<span id="string">'metro_area'</span>] == city, <span id="string">'percent_change'</span>],
+                       hue=mobility_metro[<span id="string">'destination'</span>])
+    </span><br>
+    <span id="comment">
+      #customize the plot<br>
+      #ax.set(title='TX Metroplex Area Pandemic Mobility',<br>
+      #xlabel='Week',<br>
+      #ylabel='Percent From Baseline')<br>
+    </span>
+    <span id="code">
+      plt.title(<span id="string">"Mobility For "</span> +str(city))<br>
+      plt.xticks(rotation=90)
+    </span>
+  </div>
+  <img src="https://i.imgur.com/R2JPVX1.png" style="
+  max-width: 100%;
+  height: auto;">
+  <p>Looking at the weekly data will show what people were doing in each metro area during the year.
+     You can see dips in each category. The most prominent positive spike is residence during holiday times.
+       Many of the trends are consistent throughout the metroplexes.
+  </p>
+  <h1>Conclusion</h1>
+  <iframe 
+    width="800" 
+    height="600" 
+    src="https://datastudio.google.com/embed/reporting/22f13d4b-69ec-4ba7-9dc3-0eedb1838699/page/RjdyB" frameborder="0" style="border:0" allowfullscreen></iframe>
+  </div>

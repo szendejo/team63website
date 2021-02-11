@@ -1,0 +1,77 @@
+<div id="title">Texas County Dashboard</div>
+<div class="content">
+  <mat-form-field appearance="fill">
+    <mat-label>Texas County</mat-label>
+    <mat-select [(ngModel)]="selectedCounty" name="county">
+      <mat-option *ngFor="let county of counties" [value]="county.value">
+        {{county.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="selectedCounty === 'bexar'">
+    <img src="https://i.imgur.com/wZIopmL.png" 
+      style="max-width: 100%; height: auto;">
+    <img src="https://i.imgur.com/HebHHEp.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'brazoria'">
+    <img src="https://i.imgur.com/NwcX6To.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/jzVYMCG.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'collin'">
+    <img src="https://i.imgur.com/sCLCDuH.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/O8OYByV.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'dallas'">
+    <img src="https://i.imgur.com/iXDu1VR.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/sPOKOr9.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'denton'">
+    <img src="https://i.imgur.com/KGjBcJ0.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/VR1xmIS.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'fort_bend'">
+    <img src="https://i.imgur.com/5KqrcA8.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/DNEOjNt.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'harris'">
+    <img src="https://i.imgur.com/74jU5MX.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/DZrMEM7.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'liberty'">
+    <img src="https://i.imgur.com/iQ0KwtX.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/kqhL0BF.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'tarrant'">
+    <img src="https://i.imgur.com/H4Uhv6V.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/iumaJrA.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'travis'">
+    <img src="https://i.imgur.com/G5CbDT8.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/qkYqaw2.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+  <div *ngIf="selectedCounty === 'williamson'">
+    <img src="https://i.imgur.com/kOgedpO.png" 
+      style="max-width: 100%; height: auto;">    
+    <img src="https://i.imgur.com/tJIfyCo.png" 
+      style="max-width: 100%; height: auto;">
+  </div>
+</div>
